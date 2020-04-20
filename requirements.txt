@@ -1,4 +1,4 @@
-django==1.11.14
+django==1.11.28
 python-magic>=0.4.15
 mysqlclient
 pillow
