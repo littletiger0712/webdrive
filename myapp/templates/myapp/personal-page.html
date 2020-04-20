@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Blog Single</title>
+    
+    <!-- core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/index.css' %}">
+
+    
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'images/ico/apple-touch-icon-144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/ico/apple-touch-icon-114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'images/ico/apple-touch-icon-72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'images/ico/apple-touch-icon-57-precomposed.png' %}">
+</head><!--/head-->
+
+<body>
+
+    <header id="header">
+            
+
+            <nav class="navbar navbar-inverse" role="banner">
+                <div class="container">
+                    
+                    <div class="collapse navbar-collapse navbar-right">
+                        <ul class="nav navbar-nav">
+                            <!-- <li class="active"><a href="index.html">Home</a></li> -->
+                            <li><a href="{% url 'myapp:index' %}">主页</a></li>
+                            <li><a href="{% url 'myapp:logout' %}">退出</a></li>
+                                                
+                        </ul>
+                    </div>
+                </div><!--/.container-->
+            </nav><!--/nav-->
+            
+    </header><!--/header-->
+
+
+
+
+
+    <section id="contact-page">
+            <div class="container">
+                
+            <div class="panel-body" style="height: 400px; overflow-y:scroll">
+            <div style="border: 1px  #000000; width: 90%; margin: 0 auto;">
+            <span>
+                <h5>恶法文恶法</h5>
+                    <table class="table table-striped">
+                            <caption></caption>
+                            <thead>
+                              <tr>
+                                <th>文件名</th>
+                                <th>文件大小</th>
+                                <th>文件类型</th>
+                                <th>创建时间</th>
+                                <th></th>
+                                <th></th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                        {% for item in file_data %}                
+                              <tr>
+                                {% ifequal item.kind "train_down1" %}
+                                <td>{{item.name}}</td>
+                                <td>{{ item.size}}</td>
+                                <td>{{ item.kind}}</td>
+                                <td>{{ item.datetime }}</td>
+                                <td><button class="btn"><a href="{% url 'myapp:download' item.pk %}">下载</button></td>
+                                <td><button class="btn"><a href="{% url 'myapp:delete' item.pk %}">删除</button></td>
+                                {% endifequal %}
+                              </tr>
+                              {% endfor %}
+                              
+                            </tbody>
+                          </table>
+                          </span>
+                          </div>
+                          </div>
+
+
+
+            </div><!--/.container-->
+    </section><!--/#contact-page-->
+
+
+
+    {% block script %}
+    <script type="text/javascript" src="{% static 'myapp/js/jquery-3.3.1.js' %}"></script>
+    <script type="text/javascript">
+    
+    $(function(){
+                $.get("/preview/{{ file.pk }}?thumbnail=True", 
+                    function(result) {
+                        $("#preview").html(result);
+                });
+    });
+    </script>
+        {% if not is_file %}
+            <script type="text/javascript" src="{% static 'myapp/js/upload.js' %}"></script>
+        {% endif %}
+    {% endblock %}
+    <!-- <script src="{% static 'js/jquery.js' %}"></script> -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'js/jquery.isotope.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

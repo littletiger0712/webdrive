@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Home</title>
+	
+	<!-- core CSS -->
+    {% block css %}
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+
+    
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'images/ico/apple-touch-icon-144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/ico/apple-touch-icon-114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'images/ico/apple-touch-icon-72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'images/ico/apple-touch-icon-57-precomposed.png' %}">
+    {% endblock %}
+</head><!--/head-->
+
+<body class="homepage">
+
+
+
+    <header id="header">
+            
+
+            <nav class="navbar navbar-inverse" role="banner">
+                <div class="container">
+                   
+                    
+                    <div class="collapse navbar-collapse navbar-right">
+                        <ul class="nav navbar-nav">
+                            <!-- <li class="active"><a href="index.html">Home</a></li> -->
+                            <li><a href="{% url 'myapp:personal_view' %}">个人中心</a></li>
+                            <li><a href="{% url 'myapp:logout' %}">退出</a></li>
+                            
+                        </ul>
+                    </div>
+                </div><!--/.container-->
+            </nav><!--/nav-->
+            
+    </header><!--/header-->
+
+
+    <section id="main-slider" class="no-margin">
+        <div class="carousel slide">
+            
+            <div class="carousel-inner">
+
+                <div class="item active" style="background-image: url({% static '/images/slider/bg2.jpg' %})">
+                    <div class="container">
+                        <div class="row slide-margin">
+                            <div class="col-sm-6">
+                                <div class="carousel-content">
+                                    <h1 class="animation animated-item-1">司法文本数据</h1>
+                                    <h1 class="animation animated-item-1">自动化生成系统</h1>
+                                    <h2 class="animation animated-item-2">致力于司法文本数据的生成</h2>
+                                    <a class="btn-slide animation animated-item-3" href="#">Read More</a>
+                                </div>
+                            </div>
+
+                           
+
+                        </div>
+                    </div>
+                </div><!--/.item-->
+
+               
+            </div><!--/.carousel-inner-->
+        </div><!--/.carousel-->
+        
+    </section><!--/#main-slider-->
+
+    <section id="feature" >
+        <div class="container">
+           <div class="center wow fadeInDown">
+                <h2><a href="{% url 'myapp:train' %}">训练数据生成</a></h2>
+                <p class="lead">此部分生成与输入数据分布相似的新数据 <br> 用于在深度学习训练过程中做数据扩增</p>
+            </div>
+
+            <div class="row">
+                <div class="features">
+                    <div class='col-md-3'></div>
+                    <div class="col-md-9 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <a href='train-page.html'><i class="fa fa-cogs"></i></a>
+                            <h2><a href="{% url 'myapp:train' %}">基于规则的训练数据生成</a></h2>
+                            <h3>含有Blind扩增方法、反事实扩增方法、同义词替换法</h3>
+                        </div>
+                    </div><!--/.col-md-4-->
+
+                   
+                    <div class='col-md-3'></div>
+                    <div class="col-md-9 col-sm-6 wow fadeInDown" data-wow-duration="1000ms" data-wow-delay="600ms">
+                        <div class="feature-wrap">
+                            <a href="train-page.html"><i class="fa fa-cloud-download"></i></a>
+                            <h2><a href="{% url 'myapp:train-vae' %}">VAE技术自动化生成训练数据</a></h2>
+                            <h3>训练VAE生成模型，自动化模拟原数据生成</h3>
+                        </div>
+                    </div><!--/.col-md-4-->
+                </div><!--/.services-->
+            </div><!--/.row-->    
+        </div><!--/.container-->
+    </section><!--/#feature-->
+
+    <section id="services" class="service-item">
+            <div class="container">
+                 <div class="center wow fadeInDown">
+                     <!-- <h2>测试数据生成</h2> -->
+                     <div class="a-black">
+                     <h2><a class = 'a-black' href="{% url 'myapp:test-noisy' %}">测试数据生成</a></h2>
+                     </div>
+                     <p class="lead">此部分用于生成具有多维度测试功能的测试数据 <br>用于进行深度学习模型的多维度测试</p>
+                 </div>
+     
+                 <div class="row">
+     
+                     <div class="col-sm-6 col-md-6">
+                         <div class="media services-wrap wow fadeInDown">
+                             <div class="pull-left">
+                                 <a href="test-page.html"><img class="img-responsive" src="{% static '/images/services/services2.png' %}"></a>
+                             </div>
+                             <div class="media-body">
+                                 <h3 class="media-heading"><a href="{% url 'myapp:test-noisy' %}">含噪声项测试数据生成</a></h3>
+                                 <p>包括含冗余项、含缺失项、含乱序项的测试数据生成方法</p>
+                             </div>
+                         </div>
+                     </div>
+     
+                     <!-- <div class="col-sm-6 col-md-4">
+                         <div class="media services-wrap wow fadeInDown">
+                             <div class="pull-left">
+                                <a href="test-page.html"><img class="img-responsive" src="{% static '/images/services/services1.png' %}"></a>
+                             </div>
+                             <div class="media-body">
+                                 <h3 class="media-heading"><a href="test-page.html">抗缺失性测试</a></h3>
+                                 <p>Lorem ipsum dolor sit ame consectetur adipisicing elit</p>
+                             </div>
+                         </div>
+                     </div> -->
+     
+                     <div class="col-sm-6 col-md-6">
+                         <div class="media services-wrap wow fadeInDown">
+                             <div class="pull-left">
+                                <a href="test-page.html"><img class="img-responsive" src="{% static '/images/services/services3.png' %}"></a>
+                             </div>
+                             <div class="media-body">
+                                 <h3 class="media-heading"><a href="{% url 'myapp:test-attack' %}">对抗攻击测试数据生成</a></h3>
+                                 <p>生成可对输入模型造成对抗攻击的测试数据</p>
+                             </div>
+                         </div>
+                     </div>  
+     
+                  
+             </div><!--/.container-->
+         </section><!--/#services-->
+
+
+
+    <footer id="footer" class="midnight-blue">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    Copyright &copy; 南京大学iSE实验室 
+                </div>
+                <div class="col-sm-6">
+                    <ul class="pull-right">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Faq</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer><!--/#footer-->
+
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'js/jquery.isotope.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+</body>
+</html>

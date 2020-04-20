@@ -1,0 +1,256 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_advanced.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:16 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>test</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="{% static 'css/bootstrap.min14ed.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min93e3.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/chosen/chosen.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/colorpicker/css/bootstrap-colorpicker.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/cropper/cropper.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/switchery/switchery.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/jasny/jasny-bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/nouslider/jquery.nouislider.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/ionRangeSlider/ion.rangeSlider.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/clockpicker/clockpicker.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.min862f.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/index.css' %}">
+
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'js/html5shiv.js' %}"></script>
+    <script src="{% static 'js/respond.min.js' %}"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'images/ico/apple-touch-icon-144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/ico/apple-touch-icon-114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'images/ico/apple-touch-icon-72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'images/ico/apple-touch-icon-57-precomposed.png' %}">
+
+</head>
+
+<body class="gray-bg">
+<header id="header">
+
+
+    <nav class="navbar navbar-inverse" role="banner">
+        <div class="container">
+
+            <div class="collapse navbar-collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    <!-- <li class="active"><a href="index.html">Home</a></li> -->
+                    <li><a href="{% url 'myapp:index' %}">主页</a></li>
+                    <li><a href="{% url 'myapp:personal_view' %}">个人中心</a></li>
+                    <li><a href="{% url 'myapp:logout' %}">退出</a></li>
+
+                </ul>
+            </div>
+        </div><!--/.container-->
+    </nav><!--/nav-->
+
+</header><!--/header-->
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h2>基于规则的训练数据生成</h2>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <p><b>生成说明：</b>用户输入文件并自定义规则，系统根据规则对输入文件进行数据扩增</br></br>
+                            <b>输入文件格式：</b>以txt为后缀名，句子间用回车符隔开</br></br>
+                            <b>生成方式详细说明：</b></p>
+                        <ul>
+                            <li><b>Blind扩增：</b></br>
+                                基本思想为在不改变语法语义的情况下，使用标准化的标签，来替代某种类型词汇。</br>
+                                原句：陕西省咸阳市礼泉县人民检察院指控：2003 年 3 月 2 日 19 时许，被告人王某在江桥街道饭店找李某辩论事项时，双方发生争斗，导致李某脸部、耳朵部位划伤。</br>
+                                扩增后：Province 省 City 市 County 人民检察院指控：Year 年 Month 月 Day 日 Time 时许，被告人 Name1 在江桥街道饭店找 Name2 辩论事项时，双方发生争斗，导致 Name2 脸部、耳朵部位划伤。
+                            </li>
+                            <li><b>反事实扩增：</b></br>
+                                反事实扩增方法使用与事实相反的词汇代替原有词汇，改变词语含义，却不改变整体语义的表达。</br>
+                                原句：陕西省咸阳市礼泉县人民检察院指控：2003 年 3 月 2 日 19 时许，被告人王某在江桥街道饭店找李某辩论事项时，双方发生争斗，导致李某脸部、耳朵部位划伤。</br>
+                                扩增后：山西省吕梁市文水县人民检察院指控：2011 年 5 月 23 日 10 时许，被告人孙某在江桥街道饭店找赵某辩论事项时，双方发生争斗，导致赵某脸部、耳朵部位划伤。
+                            </li>
+                            <li><b>同义词扩增：</b></br>
+                                同义词替换方法将原始文本中的同义词进行合理替换，生成新文本。</br>
+                                原句：陕西省咸阳市礼泉县人民检察院指控：2003 年 3 月 2 日 19 时许，被告人王某在江桥街道饭店找李某辩论事项时，双方发生争斗，导致李某脸部、耳朵部位划伤。</br>
+                                扩增后：陕西省咸阳市礼泉县人民检察院指控：2003 年 3 月 2 日 19 时许，被告人王某在江桥街道饭馆找李某讨论事宜时，双方发生争端，致使李某脸部、耳朵部位划伤。
+                            </li>
+                        </ul>
+                        
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>文件上传 <small>https://github.com/episage/bootstrap-3-pretty-file-upload</small></h5>
+							<div class="ibox-content">
+								<div id="file-pretty">
+                                    <form  enctype="multipart/form-data" role="form" action="{% url 'myapp:trainupload' %}" method="post">
+                                    {% csrf_token %}                                    
+									<div class="form-group">
+                                        <label class="font-noraml">文件选择（单选）</label>
+                                        {%if file %}
+                                        <span id="custom-text">已上传：{{file.name}}</span>
+                                        {% else %}
+                                        <span id="custom-text">未选择文件</span>
+                                        {% endif %}
+										<input type="file" class="form-control" name='file'>
+                                    </div>
+                                    <button type="submit" class="btn btn-default">提交文件</button>
+                                    </form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+        </div>
+		</div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title  back-change">
+                        <h5>扩增参数设置</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <fieldset>
+                                    <!-- <h3>规则描述</h3> -->
+                                 
+									<form action="{% url 'myapp:check-train' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <div class="checkbox">
+                                            <input id="checkbox1" type="checkbox" name='checkbox1' value='blind'>
+                                            <label for="checkbox1">
+                                                选择Blind扩增
+                                            </label>
+                                        </div>
+                                        <div class="input-group">
+                                            <select data-placeholder="选择属性..." class="chosen-select" multiple style="width:350px;" tabindex="2" name='blind_param'>
+										
+                                                <option value="1" hassubinfo="true" selected="selected">地点Blind</option>
+                                                <option value="2" hassubinfo="true" selected="selected">人名Blind</option>
+                                                <option value="3" hassubinfo="true" selected="selected">时间Blind</option>
+                                            </select>
+                                        </div>
+                                        <br />
+										<br />
+                                        
+										<div class="checkbox">
+                                            <input id="checkbox2" type="checkbox" name='checkbox2' value='cf'>
+                                            <label for="checkbox2">
+                                                选择反事实扩增
+                                            </label>
+
+                                            
+                                        </div>
+											<div>
+                                                <small><strong>示例：</strong> 设置倍数为1-10倍  </small>
+                                            </div>
+										<input name="cf_beishu" class="row" id="ionrange_4"></input>
+                                        <div class="input-group">
+                                            <select data-placeholder="选择属性..." class="chosen-select" multiple style="width:350px;" tabindex="2" name='cf_param'>
+                                                <option value="4" hassubinfo="true" selected="selected">地点反事实</option>
+                                                <option value="5" hassubinfo="true" selected="selected">人名反事实</option>
+                                                <option value="6" hassubinfo="true" selected="selected">时间反事实</option>
+                                            </select>
+                                            
+                                        </div>
+										<br />
+										<br />
+										<div class="checkbox">
+                                            <input id="checkbox3" type="checkbox" name='checkbox3' value="sys">
+                                            <label for="checkbox3">
+                                                选择同义词扩增
+                                            </label>
+	
+                                   
+                                        </div>
+											<div>
+                                                <small><strong>示例：</strong> 设置倍数为1-10倍  </small>
+                                            </div>
+										<input name="sys_beishu" class="row" id="ionrange_3"></input>
+										
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            
+									</form>
+                                    </div>
+                                </fieldset>
+                            </div>
+                           
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'js/jquery.isotope.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/content.min.js' %}"></script>
+    <script src="{% static 'js/plugins/chosen/chosen.jquery.js' %}"></script>
+    <script src="{% static 'js/plugins/jsKnob/jquery.knob.js' %}"></script>
+    <script src="{% static 'js/plugins/jasny/jasny-bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'js/plugins/prettyfile/bootstrap-prettyfile.js' %}"></script>
+    <script src="{% static 'js/plugins/nouslider/jquery.nouislider.min.js' %}"></script>
+    <script src="{% static 'js/plugins/switchery/switchery.js' %}"></script>
+    <script src="{% static 'js/plugins/ionRangeSlider/ion.rangeSlider.min.js' %}"></script>
+    <script src="{% static 'js/plugins/iCheck/icheck.min.js' %}"></script>
+    <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+    <script src="{% static 'js/plugins/colorpicker/bootstrap-colorpicker.min.js' %}"></script>
+    <script src="{% static 'js/plugins/clockpicker/clockpicker.js' %}"></script>
+    <script src="{% static 'js/plugins/cropper/cropper.min.js' %}"></script>
+    <script src="{% static 'js/demo/form-advanced-demo.min.js' %}"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_advanced.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:28 GMT -->
+</html>

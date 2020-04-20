@@ -1,0 +1,241 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_advanced.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:16 GMT -->
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>test</title>
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="{% static 'css/bootstrap.min14ed.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min93e3.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/chosen/chosen.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/colorpicker/css/bootstrap-colorpicker.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/cropper/cropper.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/switchery/switchery.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/jasny/jasny-bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/nouslider/jquery.nouislider.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/ionRangeSlider/ion.rangeSlider.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/clockpicker/clockpicker.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.min862f.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/index.css' %}">
+
+
+    <!--[if lt IE 9]>
+    <script src="{% static 'js/html5shiv.js' %}"></script>
+    <script src="{% static 'js/respond.min.js' %}"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'images/ico/apple-touch-icon-144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/ico/apple-touch-icon-114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'images/ico/apple-touch-icon-72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'images/ico/apple-touch-icon-57-precomposed.png' %}">
+
+</head>
+
+<body class="gray-bg">
+<header id="header">
+
+
+    <nav class="navbar navbar-inverse" role="banner">
+        <div class="container">
+
+            <div class="collapse navbar-collapse navbar-right">
+                <ul class="nav navbar-nav">
+                    <!-- <li class="active"><a href="index.html">Home</a></li> -->
+                    <li><a href="{% url 'myapp:index' %}">主页</a></li>
+                    <li><a href="{% url 'myapp:personal_view' %}">个人中心</a></li>
+                    <li><a href="{% url 'myapp:logout' %}">退出</a></li>
+
+                </ul>
+            </div>
+        </div><!--/.container-->
+    </nav><!--/nav-->
+
+</header><!--/header-->
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h2>基于VAE的生成模型训练</h2>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <p><b>生成说明：</b>系统根据用户输入文件进行VAE文本生成模型的训练</br></br>
+                            <b>输入文件及格式要求：</b></br>
+                                以txt为后缀名的文本文件，每一组数据用回车符隔开，每行包括测试文本数据及标签，测试文本数据与标签间用换行符'\t'隔开，标签间用'&'隔开，输入标签与预测模型的预测标签表示方法一致。</br>
+                                例如：这是一句例句。\t 0&1</br>
+                                
+                            <b>生成方式详细说明：</b></br>
+                                基于VAE的训练数据生成方式需要用户给出训练集数据、验证集数据、测试集数据，并选择VAE模型训练的超参数，系统将开始训练VAE生成模型，用户可以使用训练完成的VAE生成模型进行数据生成。
+
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>文件上传 <small>https://github.com/episage/bootstrap-3-pretty-file-upload</small></h5>
+							<div class="ibox-content">
+								<div id="file-pretty">
+                                    <form  enctype="multipart/form-data" role="form" action="{% url 'myapp:trainupload-vae' %}" method="post">
+                                    {% csrf_token %}                                    
+									<div class="form-group">
+                                        <label class="font-noraml">训练数据文件（单选）</label>
+                                        {%if file %}
+                                        <span id="custom-text">已上传：{{file.name}}</span>
+                                        {% else %}
+                                        <span id="custom-text">未选择文件</span>
+                                        {% endif %}
+										<input type="file" class="form-control" name='file'>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="font-noraml">验证数据文件（单选）</label>
+                                        {%if validfile %}
+                                        <span id="custom-text">已上传：{{validfile}}</span>
+                                        {% else %}
+                                        <span id="custom-text">未选择文件</span>
+                                        {% endif %}
+                                        <input type="file" class="form-control" name='file-valid'>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="font-noraml">测试数据文件（单选）</label>
+                                        {%if testfile %}
+                                        <span id="custom-text">已上传：{{testfile}}</span>
+                                        {% else %}
+                                        <span id="custom-text">未选择文件</span>
+                                        {% endif %}
+                                        <input type="file" class="form-control" name='file-test'>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-default">提交文件</button>
+                                    </form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+
+        </div>
+		</div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title  back-change">
+                        <h5>VAE模型训练参数设置</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <fieldset>
+                                    <!-- <h3>规则描述</h3> -->
+                                 
+									<form action="{% url 'myapp:check-train-vae' %}" method="post">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        
+                                    <div>
+                                        <small><strong>训练时的最大epoch数:</strong>   </small>
+                                    </div>
+                                    <input name="threshold" class="row" id="ionrange_11" value='100'></input>
+                                        
+                                    <div>
+                                        <small><strong>KL散度权重起始值：</strong>   </small>
+                                    </div>
+                                    <input name="generations" class="row" id="ionrange_12" value='0.0'></input>
+                                    
+
+                                    <div>
+                                        <small><strong>在多少个epoch内将KL散度权重恢复到1：</strong>   </small>
+                                    </div>
+                                    <input name="population" class="row" id="ionrange_13" value="20"></input>
+                                        
+                                    <div>
+                                        <small><strong>当多少个 epoch loss 不下降时开始更换学习率:</strong>   </small>
+                                    </div>
+                                    <input name="topn" class="row" id="ionrange_14" value="2"></input>
+
+                                    <div>
+                                        <small><strong>学习率下降速度:</strong>   </small>
+                                    </div>
+                                    <input name="topm" class="row" id="ionrange_19" value="0.5"></input>
+											
+										
+                                <button type="submit" class="btn btn-primary">提交</button>
+                            
+									</form>
+                                    </div>
+                                </fieldset>
+                            </div>
+                           
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'js/jquery.isotope.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/content.min.js' %}"></script>
+    <script src="{% static 'js/plugins/chosen/chosen.jquery.js' %}"></script>
+    <script src="{% static 'js/plugins/jsKnob/jquery.knob.js' %}"></script>
+    <script src="{% static 'js/plugins/jasny/jasny-bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'js/plugins/prettyfile/bootstrap-prettyfile.js' %}"></script>
+    <script src="{% static 'js/plugins/nouslider/jquery.nouislider.min.js' %}"></script>
+    <script src="{% static 'js/plugins/switchery/switchery.js' %}"></script>
+    <script src="{% static 'js/plugins/ionRangeSlider/ion.rangeSlider.min.js' %}"></script>
+    <script src="{% static 'js/plugins/iCheck/icheck.min.js' %}"></script>
+    <script src="{% static 'js/plugins/metisMenu/jquery.metisMenu.js' %}"></script>
+    <script src="{% static 'js/plugins/colorpicker/bootstrap-colorpicker.min.js' %}"></script>
+    <script src="{% static 'js/plugins/clockpicker/clockpicker.js' %}"></script>
+    <script src="{% static 'js/plugins/cropper/cropper.min.js' %}"></script>
+    <script src="{% static 'js/demo/form-advanced-demo.min.js' %}"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+</body>
+
+
+<!-- Mirrored from www.zi-han.net/theme/hplus/form_advanced.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 20 Jan 2016 14:19:28 GMT -->
+</html>

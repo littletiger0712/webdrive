@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Blog Single</title>
+    
+    <!-- core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/prettyPhoto.css' %}" rel="stylesheet">
+    <link href="{% static 'css/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'css/responsive.css' %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/css/index.css' %}">
+
+    
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'images/ico/apple-touch-icon-144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/ico/apple-touch-icon-114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'images/ico/apple-touch-icon-72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'images/ico/apple-touch-icon-57-precomposed.png' %}">
+</head><!--/head-->
+
+<body>
+
+    <header id="header">
+            
+
+            <nav class="navbar navbar-inverse" role="banner">
+                <div class="container">
+                    
+                    <div class="collapse navbar-collapse navbar-right">
+                        <ul class="nav navbar-nav">
+                            <!-- <li class="active"><a href="index.html">Home</a></li> -->
+                            <li><a href="{% url 'myapp:index' %}">主页</a></li>
+                            <li><a href="{% url 'myapp:personal_view' %}">个人中心</a></li>
+                            <li><a href="{% url 'myapp:logout' %}">退出</a></li>
+                                                   
+                        </ul>
+                    </div>
+                </div><!--/.container-->
+            </nav><!--/nav-->
+            
+    </header><!--/header-->
+
+
+
+    <section id="feature" class="transparent-bg">
+            <div class="container">
+				<div class="jumbotron">
+				  <h1 align="center">基于规则的训练数据生成</h1>
+				  <p  style="padding-left: 12%">生成说明：用户输入文件并自定义规则，系统根据规则对输入文件进行数据扩增</br>
+					输入文件格式：以txt为后缀名，句子间用回车符隔开</br>
+					具体描述</br>
+					xxxxxxxxxxx</p>
+					<div style="padding-left: 12%"> 
+                    <div class="status alert alert-success" style="display: none"></div>
+                    
+                                <div class='upload-info'>
+								
+                                <form enctype="multipart/form-data" method="post" action="{% url 'myapp:trainupload' %}">
+                                    {% csrf_token %}
+                                    {{ form }}
+                                    {%if file %}
+                                        <span id="custom-text">{{file.name}}</span>
+                                    {% else %}
+                                        <span id="custom-text">未选择文件</span>
+                                    {% endif %}
+                                    <button class="btn" id="custom-button">选择文件</button>
+                                    <button class="btn" id="custom-submit">上传文件</button>
+                                </form>
+                                </div>
+								<form class='form-login' action="{% url 'myapp:che' %}" method="post">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label><input type="checkbox" value="blind" name='check_box_list'>Blind扩增</label>
+                      </div>
+                      
+                      <div class="form-group">
+                        <label><input type="checkbox" value="cf" name='check_box_list'>反事实扩增</label>
+                      </div>
+                      <div class="form-group">
+                        <label for='name'>请选择反事实扩增文本的扩增倍数：</label>
+                        <select name='cf_beishu' id='cf_beishu'>
+                            <option value="2">2倍</option>
+                            <option value="3">3倍</option>
+                            <option value="5">5倍</option>
+                            <option value="10">10倍</option>
+
+                        </select>
+                    </div>
+                      <div class="form-group">
+                        <label><input type="checkbox" value="sysnonyms" name='check_box_list'>同义词替换</label>
+                      </div>
+                      <div class="form-group">
+                        <label for='name'>请选择同义词扩增文本的扩增倍数：</label>
+						<div class="dropdown">
+  <button id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown trigger
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dLabel">
+    ...
+  </ul>
+</div>
+
+                        <select name='sys_beishu' id='sys_beishu'>
+                            <option value="2">2倍</option>
+                            <option value="3">3倍</option>
+                            <option value="5">5倍</option>
+                            <option value="10">10倍</option>
+
+                        </select>
+                    </div>
+                      <button type="submit" class="btn btn-primary btn-lg">提交</button>
+
+                  </form>
+                    <!-- </form>  -->
+                </div><!--/.row-->
+            </div><!--/.container-->
+    </section><!--/#feature-->
+
+
+
+
+<div class="btn-group dropdown">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Action <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
+<!--js激活下拉菜单-->
+<script type="text/javascript">
+    $(function(){
+        $(".btn").dropdown();
+    });
+</script>
+
+
+
+
+
+    {% block script %}
+    <script type="text/javascript" src="{% static 'myapp/js/jquery-3.3.1.js' %}"></script>
+    <script type="text/javascript">
+    
+    $(function(){
+                $.get("/preview/{{ file.pk }}?thumbnail=True", 
+                    function(result) {
+                        $("#preview").html(result);
+                });
+    });
+    </script>
+        {% if not is_file %}
+            <script type="text/javascript" src="{% static 'myapp/js/upload.js' %}"></script>
+        {% endif %}
+    {% endblock %}
+    <!-- <script src="{% static 'js/jquery.js' %}"></script> -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/jquery.prettyPhoto.js' %}"></script>
+    <script src="{% static 'js/jquery.isotope.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+</body>
+</html>
